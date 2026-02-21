@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\InvokableController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstController;
@@ -44,3 +45,5 @@ Route::get('item2',InvokableController::class);
 
 
 Route::post("post-route",[FirstController::class,'index9']);
+
+Route::get('get-data',[DataController::class,'index']);
