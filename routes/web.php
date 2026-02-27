@@ -6,6 +6,7 @@ use App\Http\Controllers\InvokableController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ItemController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,3 +48,19 @@ Route::get('item2',InvokableController::class);
 Route::post("post-route",[FirstController::class,'index9']);
 
 Route::get('get-data',[DataController::class,'index']);
+
+
+Route::get('create1',[ItemController::class,'create1']);
+Route::get('create2',[ItemController::class,'create2']);
+Route::get('create3',[ItemController::class,'create3']);
+Route::post('create4',[ItemController::class,'create4']);
+Route::post('create5',[ItemController::class,'create5']);
+
+Route::get('getById/{id}',[ItemController::class,'getById']);
+Route::get('getAllItems',[ItemController::class,'getAllItems']);
+Route::get('getIemByCondition',[ItemController::class,'getIemByCondition']);
+Route::get('getItemByMultipleCondition',[ItemController::class,'getItemByMultipleCondition']);
+Route::get('getItemOr',[ItemController::class,'getItemOr']);
+Route::get('getWhereIn',[ItemController::class,'getWhereIn']);
+Route::get('getBetween',[ItemController::class,'getBetween']);
+
