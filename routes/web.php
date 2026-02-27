@@ -63,4 +63,24 @@ Route::get('getItemByMultipleCondition',[ItemController::class,'getItemByMultipl
 Route::get('getItemOr',[ItemController::class,'getItemOr']);
 Route::get('getWhereIn',[ItemController::class,'getWhereIn']);
 Route::get('getBetween',[ItemController::class,'getBetween']);
+Route::get('getItemsOrdered',[ItemController::class,'getItemsOrdered']);
+Route::get('statistics',[ItemController::class,'statistics']);
+Route::get('AdvisorJoin',[ItemController::class,'AdvisorJoin']);
+Route::get('selectAttr',[ItemController::class,'selectAttr']);
+
+Route::get('update1',[ItemController::class,'update1']);
+Route::get('massUpdate',[ItemController::class,'massUpdate']);
+
+
+Route::put('update/{id}',[ItemController::class,'update2']);
+Route::put('update3/{id}',[ItemController::class,'update3']);
+
+Route::get('createOrUpdate',[ItemController::class,'createOrUpdate']);
+
+
+
+Route::get('massDelete',[ItemController::class,'massDelete']);
+
+
+Route::get('delete/{id}',[ItemController::class,'delete']);
 

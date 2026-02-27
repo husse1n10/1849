@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advisor;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -135,6 +136,117 @@ class ItemController extends Controller
             ->get();
         return $items;
 
+    }
+
+    public function getItemsOrdered()
+    {
+
+        $data = Item::where('price','>',100)->orderBy('price','asc')->get();
+
+        $data = Item::where('price','>',100)->orderBy('price','desc')->get();
+
+
+        return $data;
+
+    }
+
+    public function statistics(){
+        $maxPrice = Item::max('price');
+        $minPrice = Item::min("price");
+        $avgPrice = Item::avg('price');
+        $countId = Item::count('id');
+        $sumPrice = Item::sum('price');
+        return response([
+            'maxPrice'=>$maxPrice,
+            'minPrice'=>$minPrice,
+            'avgPrice'=>$avgPrice,
+            'countId'=>$countId,
+            'sumPrice'=>$sumPrice,
+        ]);
+    }
+
+    public function AdvisorJoin()
+    {
+
+        $data = Advisor::join('students','advisors.id','students.advisor_id')
+            ->get();
+        return $data;
+    }
+
+    public function selectAttr()
+    {
+        // Select title, description from items;
+        $data =Item::where('price','>',1000)
+            ->select(['title','description'])->get();
+        return $data;
+    }
+
+
+    public function update1()
+    {
+        $row = Item::find(1);
+        $row->title = "Updated Title";
+        $row->description = "Updated Description";
+        $row->price = 10;
+        $row->save();
+        return response(['message'=>'Row updated Successfully'],Response::HTTP_OK);
+    }
+
+    public function massUpdate()
+    {
+        Item::where('price','>',1000)
+            ->update(['title'=>'High level product']);
+        return response(['message'=>'Row updated Successfully'],Response::HTTP_OK);
+    }
+
+    public function update2(Request $request, $id)
+    {
+        $data = Item::findOrFail($id);
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->price = $request->price;
+        $data->save();
+        return "done";
+    }
+
+    public function update3(Request $request, $id){
+        $data = Item::findOrFail($id);
+        $data->fill($request->all());
+        if($data->isClean()){
+            return "no data updated";
+        }
+        $data->save();
+        return "done";
+    }
+
+    public function createOrUpdate()
+    {
+        Item::updateOrCreate(
+            [
+                'id'=>1
+            ],
+            [
+                'title'=>'title',
+                'description'=>'description',
+                'price'=>0,
+            ]
+        );
+        return "done";
+    }
+
+
+    public function delete($id)
+    {
+        $row = Item::findOrFail($id);
+        $row->delete();
+        return "done";
+
+    }
+
+    public function massDelete()
+    {
+        Item::where('price','>',1000)->delete();
+        return "done";
     }
 
 }

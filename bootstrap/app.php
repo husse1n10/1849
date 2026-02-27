@@ -14,7 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'post-route',
             'create4',
-            'create5'
+            'create5',
+            'update/*',
+            'update3/*'
 
         ]);
     })
