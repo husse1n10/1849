@@ -8,6 +8,8 @@ use App\Http\Controllers\FirstController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 
 Route::get('/', function () {
@@ -91,3 +93,16 @@ Route::get('second-page',[ViewController::class,'index2']);
 
 Route::get('list-items',[ViewController::class,'listItems']);
 Route::get('view-item/{id}',[ViewController::class,'viewItem'])->name('viewItemCustom');
+
+
+Route::get('list-products',[ProductController::class,'list'])->name('listProducts');
+Route::get('add-product',[ProductController::class,'add'])->name('addProduct');
+Route::post('save-product',[ProductController::class,'save'])->name('saveProduct');
+Route::get('view-product/{id}',[ProductController::class,'view'])->name('viewProduct');
+Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('editProduct');
+Route::put('update-product/{id}',[ProductController::class,'update'])->name('updateProduct');
+Route::delete('delete-product/{id}',[ProductController::class,'delete'])->name('deleteProduct');
+Route::get('delete-product2/{id}',[ProductController::class,'delete'])->name('deleteProduct2');
+
+Route::resource('category',CategoryController::class);
+Route::get('delete-category/{category}',[CategoryController::class,'destroy'])->name('category.delete');
