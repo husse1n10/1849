@@ -41,8 +41,10 @@
 <form method="post" action="{{route('category.store')}}">
     @csrf
     <label for="name">Name</label>
-    <input required type="text" id="name" name="name" placeholder="Category Name">
-
+    <input  type="text" id="name" name="name" placeholder="Category Name">
+    @error('name')
+    <span style="color:red;">{{$message}}</span>
+    @enderror
     <input type="submit" value="Submit">
  <a href="{{Route('category.index')}}">Back</a>
 </form>

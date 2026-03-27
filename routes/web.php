@@ -10,6 +10,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 
 
 Route::get('/', function () {
@@ -106,3 +107,9 @@ Route::get('delete-product2/{id}',[ProductController::class,'delete'])->name('de
 
 Route::resource('category',CategoryController::class);
 Route::get('delete-category/{category}',[CategoryController::class,'destroy'])->name('category.delete');
+
+Route::get('page1',[PageController::class,'page1']);
+Route::get('page2',[PageController::class,'page2']);
+
+Route::get('index',[PageController::class,'index']);
+Route::get('blog',[PageController::class,'blog']);

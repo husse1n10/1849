@@ -20,6 +20,17 @@ class ProductController extends Controller
     }
 
     public function save(Request $request){
+        $request->validate([
+           'body_title'=> 'required|unique:products,title',
+            'body_description'=>'required|min:20',
+//            'body_price'=>'required|same:body_price2',
+               'body_price' => 'required|confirmed',
+            'body_category'=>'required',
+        ],
+        [
+            'required' => 'The :attribute field is mandatory.',
+//            'body_title.required'=>'This field is required',
+        ]);
         $title = $request->body_title;
         $description = $request->body_description;
         $price = $request->body_price;
